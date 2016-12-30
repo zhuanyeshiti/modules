@@ -1,0 +1,7 @@
+0xb910e158	xhci_dbg_trace	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0x8acca046	xhci_resume	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0xcf915c48	xhci_init_driver	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0xa21c8d39	xhci_gen_setup	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0x34a8da5f	__tracepoint_xhci_dbg_quirks	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0x70a802d9	xhci_suspend	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
+0x0037a166	xhci_run	/root/modules/host-test/bhci-hcd	EXPORT_SYMBOL_GPL
