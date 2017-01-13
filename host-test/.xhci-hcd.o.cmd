@@ -1,0 +1,1 @@
+cmd_/root/modules/host-test/xhci-hcd.o := ld -m elf_x86_64   -r -o /root/modules/host-test/xhci-hcd.o /root/modules/host-test/xhci.o /root/modules/host-test/xhci-mem.o /root/modules/host-test/xhci-ring.o /root/modules/host-test/xhci-hub.o /root/modules/host-test/xhci-dbg.o /root/modules/host-test/xhci-trace.o 

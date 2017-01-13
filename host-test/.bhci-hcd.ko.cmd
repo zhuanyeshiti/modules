@@ -1,0 +1,1 @@
+cmd_/root/modules/host-test/bhci-hcd.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /root/modules/host-test/bhci-hcd.ko /root/modules/host-test/bhci-hcd.o /root/modules/host-test/bhci-hcd.mod.o
