@@ -10,13 +10,15 @@ static struct work_struct work1;
 static void work_handler(struct work_struct *data)
 {
 	//pr_info("got into %s\n", __func__);
-	for(int i=0;i<3000;i++)
+	int i;
+	for(i=0;i<3000;i++)
 		printk("1: %d\n",i);
 }
 
 static void work_handler1(struct work_struct *data)
 {
-	for(int i=3001;i<6000;i++)
+	int i;
+	for(i=3001;i<6000;i++)
 		printk("2: %d\n",i);
 }
 
