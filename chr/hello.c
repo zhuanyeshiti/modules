@@ -3,6 +3,9 @@
 #include <linux/cdev.h>
 #include <linux/fs.h>
 #include <linux/device.h>
+#include <asm/uaccess.h> // access_ok(type, addr, size)
+#include <linux/slab.h>
+#include <linux/string.h>
 
 static int mem_major = 0;
 module_param(mem_major, int, S_IRUGO|S_IWUSR);
@@ -24,10 +27,36 @@ int mem_release(struct inode *inode, struct file *filp)
 	printk("in mem_ralease\n");
 	return 0;
 }
+ssize_t mem_write(struct file *filp, const char __user *buf, size_t count, loff_t *fpos)
+{
+	int result;
+	char *ch;
+	result = access_ok(VERIFY_READ, buf, count);
+	if(!result)
+	{
+		printk("write error!\n");
+	}
+	ch = kmalloc(count, GFP_KERNEL);
+	memset(ch, 0, strlen(ch));
+	copy_from_user(ch, buf, count);
+	printk("write: %s\n", ch);
+	return (ssize_t)count;
+}
 long mem_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
+	int result;
+	char *ch;
 	printk("int mem_ioctl\n");
-	printk("cmd is %d, arg is %lu\n", cmd, arg);
+	ch = kmalloc(16, GFP_KERNEL);
+	memset(ch, 0, strlen(ch));
+	result = access_ok(VERIFY_READ, (void *)arg, cmd);
+	if(!result)
+	{
+		printk("error verify_read\n");
+	}
+	copy_from_user(ch, (char *)arg, cmd);
+	//printk("cmd is %d, arg is %s\n", cmd, (char *)arg);
+	printk("cmd is %d, arg is %s\n", cmd, ch);
 	return 0;
 }
 
@@ -40,6 +69,8 @@ static const struct file_operations mem_ops =
 {
 	.owner = THIS_MODULE,
 	.open = mem_open,
+	.read = NULL,
+	.write = mem_write,
 	.release = mem_release,
 	//.compat_ioctl = mem_ioctl,
 	.unlocked_ioctl = mem_ioctl,

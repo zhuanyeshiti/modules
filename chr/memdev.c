@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	{
 		printf("error open\n");
 	}
-	result = ioctl(fd, 0, "222");
+	result = ioctl(fd, 3, "al_args");
 	if(result < 0)
 	{
 		printf("error ioctl\n");
