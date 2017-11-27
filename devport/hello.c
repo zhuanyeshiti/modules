@@ -66,16 +66,20 @@ long mem_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		printk("error verify_write\n");
 	}
 	/********************************/
-	copy_from_user(port1, (int *)arg, 4);
+	copy_from_user(port1, (int *)arg, 8);
+	port2 = port1;
 	switch(cmd) {
 		case 0:
 			value = inb(*port1);
 			break;
 		case 1:
 			value = inw(*port1);
+			printk("do you know what the fuck????\n");
 			break;
 		case 3:
-			value = inl(*port1);
+			outb(*(++port2), *port1);
+			printk("0x%x\n", *port2);
+			value = inb(*port1);
 			break;
 		default:
 			break;

@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 	int fd;
 	int result, cmd_code;
 	int *a;
+	int *b;
 	int childpid;
 
 	uid_t uid;
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 skip_fork:
 	a = (int *)malloc(200);
 	memset(a, 0, 200);
+	b = a;
 	*a = 0x80;
 	/*
 	* for(i=0; i<argc; i++)
@@ -63,6 +65,11 @@ skip_fork:
 			break;
 		case 'l':
 			cmd_code = 3;
+			b++;
+			*b = check_arg(argv[3], 1);
+			printf("write 0x%x to port: 0x%x\n", *(a+1), *a);
+			//printf("argv3 = %s\n", argv[3]);
+			//printf("write data is: %d\n", *(a+1));
 			break;
 		default:
 			printf("wrong cmd_code, return!\n");

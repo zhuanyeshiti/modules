@@ -4,13 +4,13 @@
 
 int check_arg(char *arg, int a)
 {
-	int value;
+	int value = 0;
 	int len;
 	int i;
 	int tmp;
 	tmp = 1;
 	len = strlen(arg);
-	//printf("%c\n", *arg);
+	//printf("%c, length is: %d\n", *arg, len);
 	if((*arg != '0') || (*(++arg) != 'x')) {
 		printf("port format wrong, should begin with 0x, like 0xffff!\n");
 		return -1;
